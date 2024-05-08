@@ -16,14 +16,14 @@ pipeline {
             post {
                 success {
                     echo '--- Tests Succeeded ---'
-                    emailext subject: 'Tests Completed - Success',
+                    emailext subject: 'Tests Succeeded',
                              body: 'Unit and integration tests have completed successfully.\n\n${BUILD_LOG, maxLines=1000}',
                              to: 'zebadeakinuni@gmail.com',
                              attachLog: true
                 }
                 failure {
                     echo '--- Tests Failed ---'
-                    emailext subject: 'Tests Completed - Failure',
+                    emailext subject: 'Tests failed',
                              body: 'Unit and integration tests have failed.\n\n${BUILD_LOG, maxLines=1000}',
                              to: 'zebadeakinuni@gmail.com',
                              attachLog: true
@@ -44,14 +44,14 @@ pipeline {
             post {
                 success {
                     echo '--- Security Scan Succeeded ---'
-                    emailext subject: 'Security Scan Completed - Success',
+                    emailext subject: 'Success in security',
                              body: 'Security scan has completed successfully.\n\n${BUILD_LOG, maxLines=1000}',
                              to: 'zebadeakinuni@gmail.com',
                              attachLog: true
                 }
                 failure {
                     echo '--- Security Scan Failed ---'
-                    emailext subject: 'Security Scan Completed - Failure',
+                    emailext subject: 'Failure in security',
                              body: 'Security scan has failed.\n\n${BUILD_LOG, maxLines=1000}',
                              to: 'zebadeakinuni@gmail.com',
                              attachLog: true
@@ -61,29 +61,29 @@ pipeline {
         stage('Deploy to Staging') 
         {
             steps {
-                echo '--- Deploying to staging environment ---'
-                echo 'Deploying to staging environment...'
+                echo '--- Staging environment ---'
+                echo 'Staging environment...'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo '--- Running integration tests on staging environment ---'
-                echo 'Running integration tests on staging environment...'
+                echo '--- Running integration ---'
+                echo 'Running integration ...'
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo '--- Deploying to production environment ---'
-                echo 'Deploying to production environment...'
+                echo '--- Production environment ---'
+                echo 'Production environment...'
             }
         }
     }
     post {
         success {
-            echo '--- Pipeline Successful message---'
+            echo '--- Pipeline built successfully ---'
         }
         failure {
-            echo '--- Pipeline Failed message ---'
+            echo '--- Error in Pipeline ---'
         }
     }
 }
